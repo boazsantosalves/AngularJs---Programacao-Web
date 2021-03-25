@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>AngularJS</title>
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!--AngularJs-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script>
+      angular.module('app',[]);
+      angular.module('app').controller('meuController', function($scope){
+        $scope.lista = [];
+        $scope.adiciona = function(aluno){
+          $scope.lista.push(angular.copy(aluno));
+        };
+        
+      });
+    </script>  
+
+  </head>
+
+  <body ng-app="app">
+
+    <div ng-controller="meuController" class="container">
+      <!-- Criando colunas -->
+      <div class="row">
+        
+        <div class="col-sm">
+          <!--Apenas para centralizar a coluna do meio-->
+        </div>
+
+        <div class="col-7">
+          <br>
+          <h4 class="text-center">Cadastro de alunos</h4> <hr>
+          <br>
+          
+          <!-- FORM -->
+          <form name="meuForm">
+            <div class="form-group">
+              <label for="">Nome</label>
+              <input ng-model="aluno.nome" required type="text" class="form-control" placeholder="nome do aluno">
+            </div>
+            <div class="form-group">
+              <label for="">Email</label>
+              <input ng-model="aluno.email" required type="text" class="form-control" placeholder="email">
+            </div>
+            <div class="form-group">
+              <label for="">Telefone</label>
+              <input ng-model="aluno.fone" required type="text" class="form-control" placeholder="telefone">
+            </div>
+            <br>
+            <button ng-click="adiciona(aluno)" type="submit" ng-disabled="meuForm.$invalid" class="btn btn-primary btn-lg btn-block" id="btn">Cadastrar</button>
+            <small id="btn" class="form-text text-muted text-center">Você só pode cadastrar quando todos os campos estiverem preenchidos!</small>
+          </form>
+          <br><br><br><br>
+          <!-- FORM --> 
+
+
+          <!-- LISTAGEM -->
+          <div ng-if="lista.length == 0" class="alert alert-warning text-center" role="alert">
+            Nenhum aluno cadastrado
+          </div>
+
+          <table ng-if="lista.length > 0" class="table table-striped table-hover table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telefone</th>
+                <th scope="col" class="text-center">Opções</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="aluno in lista">
+                <td>{{aluno.nome}}</td>
+                <td>{{aluno.email}}</td>
+                <td>{{aluno.fone}}</td>
+                <td class="text-center"><button type="button" class="btn btn-danger btn-sm"> Deletar </button></td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- LISTAGEM -->
+
+        </div>
+
+        <div class="col-sm">                               
+          <!--Apenas para centralizar a coluna do meio-->
+        </div>
+
+
+      </div>
+    </div>
+
+
+  </body>
+
+
+
+</html>
